@@ -15,6 +15,7 @@ module "ssm_patch_log_s3_bucket_label" {
   # attributes = ["scan-window"]
   context = module.this.context
 }
+
 data "aws_iam_policy_document" "bucket_policy" {
   count = local.create_log_bucket ? 1 : 0
   statement {
@@ -41,7 +42,7 @@ data "aws_iam_policy_document" "bucket_policy" {
 module "ssm_patch_log_s3_bucket" {
   count   = local.create_log_bucket ? 1 : 0
   source  = "cloudposse/s3-bucket/aws"
-  version = "2.0.0"
+  version = "4.0.0"
 
   acl                     = "private"
   versioning_enabled      = var.ssm_bucket_versioning_enable
